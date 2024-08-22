@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>服务熔断&amp;降级 | Huaqianggg|Blog</title>
+  <title>MySql-索引 | Huaqianggg|Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="服务熔断所谓熔断就是建立类似电器里面的保险丝的功能，当客户端访问服务端的时候，发现服务端的请求出现异常，就直接断开，不再调用服务端，返回一个默认的数据 还有半熔断的概念，就是客户端可以允许一部分的请求访问服务端，用来检测服务端是否正常，如果正常的话，那么就关闭熔断 服务降级1、客户端降级：如果客户端发现服务端的服务不可用，那么不再请求服务端，直接返回一个固定的数据给调用方，对服务端的服务进行降级处">
+  <meta name="description" content="在 MySQL 的 InnoDB 存储引擎中，直接创建哈希索引是不被支持的。InnoDB 引擎默认使用 B-tree 索引结构，并且不允许手动指定索引类型为哈希索引。 不过，InnoDB 会在某些情况下自动使用哈希索引的特性。具体来说，InnoDB 引擎在处理自适应哈希索引（Adaptive Hash Index, AHI）时，会根据查询模式动态地将一些 B-tree 索引部分转换为哈希索引，以加">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务熔断&amp;降级">
-<meta property="og:url" content="https://yuanhuaqiang.github.io/2021/04/11/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD-%E9%99%8D%E7%BA%A7/index.html">
+<meta property="og:title" content="MySql-索引">
+<meta property="og:url" content="https://yuanhuaqiang.github.io/2024/08/22/MySql-%E7%B4%A2%E5%BC%95/index.html">
 <meta property="og:site_name" content="Huaqianggg|Blog">
-<meta property="og:description" content="服务熔断所谓熔断就是建立类似电器里面的保险丝的功能，当客户端访问服务端的时候，发现服务端的请求出现异常，就直接断开，不再调用服务端，返回一个默认的数据 还有半熔断的概念，就是客户端可以允许一部分的请求访问服务端，用来检测服务端是否正常，如果正常的话，那么就关闭熔断 服务降级1、客户端降级：如果客户端发现服务端的服务不可用，那么不再请求服务端，直接返回一个固定的数据给调用方，对服务端的服务进行降级处">
+<meta property="og:description" content="在 MySQL 的 InnoDB 存储引擎中，直接创建哈希索引是不被支持的。InnoDB 引擎默认使用 B-tree 索引结构，并且不允许手动指定索引类型为哈希索引。 不过，InnoDB 会在某些情况下自动使用哈希索引的特性。具体来说，InnoDB 引擎在处理自适应哈希索引（Adaptive Hash Index, AHI）时，会根据查询模式动态地将一些 B-tree 索引部分转换为哈希索引，以加">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-11T06:55:17.000Z">
-<meta property="article:modified_time" content="2023-02-13T07:22:26.355Z">
+<meta property="article:published_time" content="2024-08-22T03:40:15.000Z">
+<meta property="article:modified_time" content="2024-08-22T03:41:25.706Z">
 <meta property="article:author" content="YuanHuaQiang">
 <meta name="twitter:card" content="summary">
   
@@ -73,10 +73,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-服务熔断-降级" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-MySql-索引" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/04/11/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD-%E9%99%8D%E7%BA%A7/" class="article-date">
-  <time class="dt-published" datetime="2021-04-11T06:55:17.000Z" itemprop="datePublished">2021-04-11</time>
+    <a href="/2024/08/22/MySql-%E7%B4%A2%E5%BC%95/" class="article-date">
+  <time class="dt-published" datetime="2024-08-22T03:40:15.000Z" itemprop="datePublished">2024-08-22</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      服务熔断&amp;降级
+      MySql-索引
     </h1>
   
 
@@ -95,15 +95,23 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h3><p>所谓熔断就是建立类似电器里面的保险丝的功能，当客户端访问服务端的时候，发现服务端的请求出现异常，就直接断开，不再调用服务端，返回一个默认的数据</p>
-<p>还有半熔断的概念，就是客户端可以允许一部分的请求访问服务端，用来检测服务端是否正常，如果正常的话，那么就关闭熔断</p>
-<h3 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h3><p>1、客户端降级：如果客户端发现服务端的服务不可用，那么<strong>不再请求服务端，直接返回一个固定的数据给调用方</strong>，对服务端的服务进行降级处理</p>
-<p>2、服务端降级：如果服务端发现系统超负荷运行，为了系统的自身的稳定性，对特定的服务进行降级，比如<strong>直接返回错误或者固定数据</strong></p>
+        <p>在 MySQL 的 InnoDB 存储引擎中，直接创建哈希索引是不被支持的。InnoDB 引擎默认使用 B-tree 索引结构，并且不允许手动指定索引类型为哈希索引。</p>
+<p>不过，InnoDB 会在某些情况下自动使用哈希索引的特性。具体来说，InnoDB 引擎在处理自适应哈希索引（Adaptive Hash Index, AHI）时，会根据查询模式动态地将一些 B-tree 索引部分转换为哈希索引，以加速等值查询。</p>
+<p>自适应哈希索引（Adaptive Hash Index, AHI）是 InnoDB 存储引擎的一个自动优化特性，用于加速特定查询的性能。InnoDB 根据实际的查询模式来决定是否为某些 B-tree 索引生成哈希索引部分，以优化等值查询的速度。这个过程主要与查询模式和访问频率有关，而不是直接根据字段类型来决定。</p>
+<p>解释 MySQL 中索引的类型（B-tree、Hash 等）及适用场景。</p>
+<ol>
+<li>B-tree 索引</li>
+</ol>
+<p>适用场景：</p>
+<p>• 范围查询：B-tree 索引适合于范围查询，例如 BETWEEN、&lt;、&gt; 等操作。这是因为 B-tree 结构中的节点是有序的，可以快速找到范围内的记录。<br>• 排序操作：B-tree 索引在进行排序操作时也很高效，因为数据在索引中的顺序与实际数据顺序一致。<br>• 主键和唯一索引：通常情况下，B-tree 索引用于主键和唯一索引，以确保数据的唯一性和快速查找。<br>2. Hash 索引</p>
+<p>适用场景：</p>
+<p>• 等值查询：Hash 索引非常适合等值查询（例如 &#x3D; 或者 IN），因为 Hash 索引基于哈希算法，可以直接定位到具体的记录。<br>• 高并发查询：在高并发的情况下，Hash 索引因为其快速查找的特性，可以提升查询性能。<br>总结</p>
+<p>•	B-tree 索引适合大多数查询场景，包括等值查询和范围查询，是 MySQL 中最常用的索引类型。<br>•	Hash 索引适合高性能的等值查询，但不支持范围查询和排序操作。<br>•	Full-text 索引适合全文搜索，但不适合精确匹配。<br>•	R-tree 索引适合地理空间数据查询，常用于 GIS 系统中。<br>•	聚簇索引通常用于主键索引，适合需要快速数据检索的场景。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://yuanhuaqiang.github.io/2021/04/11/%E6%9C%8D%E5%8A%A1%E7%86%94%E6%96%AD-%E9%99%8D%E7%BA%A7/" data-id="cle2hptjq000bjoej0ves0qhc" data-title="服务熔断&amp;降级" class="article-share-link">分享</a>
+      <a data-url="https://yuanhuaqiang.github.io/2024/08/22/MySql-%E7%B4%A2%E5%BC%95/" data-id="cm04qkug500002lejegbxha1h" data-title="MySql-索引" class="article-share-link">分享</a>
       
       
       
@@ -113,19 +121,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/04/11/SpringCloud%E5%BC%80%E5%90%AFDashBoard%E7%9B%91%E6%8E%A7/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          SpringCloud开启DashBoard监控
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/04/09/2021-04-09%E9%9D%A2%E8%AF%95%E4%B8%80%E4%BA%92/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/04/18/2021-04-17%E9%9D%A2%E8%AF%95%E5%98%89%E7%AB%8B%E5%88%9B/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">2021/04/09面试一互</div>
+      <div class="article-nav-title">2021/04/17面试嘉立创</div>
     </a>
   
 </nav>
