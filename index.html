@@ -73,6 +73,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Vue懒加载" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/25/Vue%E6%87%92%E5%8A%A0%E8%BD%BD/" class="article-date">
+  <time class="dt-published" datetime="2024-08-25T08:40:48.000Z" itemprop="datePublished">2024-08-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/08/25/Vue%E6%87%92%E5%8A%A0%E8%BD%BD/">Vue懒加载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>问题：nginx代理vue项目时除了首页外其他页面无法打开。</p>
+<p>原因：vue懒加载没有正确执行。</p>
+<p>解决办法：使用‘@babel&#x2F;plugin-syntax-dynamic-import’插件代替‘dynamic-import-node’</p>
+<p>总结：<br>当使用 @babel&#x2F;plugin-syntax-dynamic-import 插件时，它仅仅为 Babel 提供了解析动态导入语法的能力，而不会实际改变动态导入的行为。这意味着你的代码仍然可以按预期方式进行懒加载。</p>
+<p>与此相反，dynamic-import-node 插件会将所有的 import() 语句转换为 require()，从而在构建阶段实现同步导入。这可能会影响懒加载的实现，尤其是在某些复杂的配置中或与其他插件、工具产生冲突时。</p>
+<p>因此，使用 @babel&#x2F;plugin-syntax-dynamic-import 可以避免因为强制同步化导入而引起的配置冲突或行为变化，从而让懒加载功能在开发和生产环境下都正常工作。这解释了为什么更换插件后，懒加载功能可以正确运行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yuanhuaqiang.github.io/2024/08/25/Vue%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="cm09bpjtu0009acuo6obtc285" data-title="Vue懒加载" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-TCP和UDP协议在应用场景上的差异" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/08/22/TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8A%E7%9A%84%E5%B7%AE%E5%BC%82/" class="article-date">
@@ -115,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://yuanhuaqiang.github.io/2024/08/22/TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8A%E7%9A%84%E5%B7%AE%E5%BC%82/" data-id="cm04xmiju0004e5ou7osoblbj" data-title="TCP 和 UDP 协议在应用场景上的差异" class="article-share-link">分享</a>
+      <a data-url="https://yuanhuaqiang.github.io/2024/08/22/TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8A%E7%9A%84%E5%B7%AE%E5%BC%82/" data-id="cm09bpjtv000bacuo9x7shbpk" data-title="TCP 和 UDP 协议在应用场景上的差异" class="article-share-link">分享</a>
       
       
       
@@ -673,51 +719,6 @@
 
 
   
-    <article id="post-SpringCloud开启DashBoard监控" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/11/SpringCloud%E5%BC%80%E5%90%AFDashBoard%E7%9B%91%E6%8E%A7/" class="article-date">
-  <time class="dt-published" datetime="2021-04-11T07:49:02.000Z" itemprop="datePublished">2021-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/11/SpringCloud%E5%BC%80%E5%90%AFDashBoard%E7%9B%91%E6%8E%A7/">SpringCloud开启DashBoard监控</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <ol>
-<li>导入DashBoard依赖</li>
-<li>在需要监控的服务中导入actuator依赖，注入一个Bean将 <code>registrationBean.addUrlMappings(&quot;/actuator/hystrix.stream&quot;);</code></li>
-<li>在需要监控的接口加上@HystrixCommand注解</li>
-<li>启动类添加@EnableCircuitBreaker注解</li>
-<li>监控服务参数修改 hystrix.dashboard.proxy-stream-allow-list: “*”</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://yuanhuaqiang.github.io/2021/04/11/SpringCloud%E5%BC%80%E5%90%AFDashBoard%E7%9B%91%E6%8E%A7/" data-id="cle2hptjo0007joejf2wghram" data-title="SpringCloud开启DashBoard监控" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -736,7 +737,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interview/" rel="tag">interview</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interview/" rel="tag">interview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
     </div>
   </div>
 
@@ -746,7 +747,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/interview/" style="font-size: 20px;">interview</a>
+      <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/interview/" style="font-size: 20px;">interview</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a>
     </div>
   </div>
 
@@ -768,6 +769,10 @@
       <ul>
         
           <li>
+            <a href="/2024/08/25/Vue%E6%87%92%E5%8A%A0%E8%BD%BD/">Vue懒加载</a>
+          </li>
+        
+          <li>
             <a href="/2024/08/22/TCP%E5%92%8CUDP%E5%8D%8F%E8%AE%AE%E5%9C%A8%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8A%E7%9A%84%E5%B7%AE%E5%BC%82/">TCP 和 UDP 协议在应用场景上的差异</a>
           </li>
         
@@ -781,10 +786,6 @@
         
           <li>
             <a href="/2021/04/18/2021-04-16%E9%9D%A2%E8%AF%95%E6%9C%A8%E5%85%89/">2021/04/16面试木光</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">Redis分布式锁</a>
           </li>
         
       </ul>
